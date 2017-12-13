@@ -14,6 +14,10 @@ class Author
       super
     end
   end
+
+  def respond_to_missing?(method_name, include_private = false)
+    method_name.to_s.start_with?('author_') || super
+  end
 end
 
 author = Author.new
@@ -24,4 +28,6 @@ author.genre = "Computer Science"
 p author.first_name
 p author.genre
 p author.respond_to?(:inspect)
+
+# only returns true once respond_to_missing? method is overriden.
 p author.respond_to?(:author_genre)
